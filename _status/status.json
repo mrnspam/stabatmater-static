@@ -1,0 +1,15 @@
+{
+  "mode": "full",
+  "phase": "download",
+  "max_depth": 2,
+  "queued": {
+    "pages": 0,
+    "assets": 0
+  },
+  "fetched": {
+    "pages": 486,
+    "assets": 945
+  },
+  "failed": 25,
+  "time": "2025-08-16T01:06:36.368503Z"
+}

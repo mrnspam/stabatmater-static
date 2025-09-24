@@ -1,10 +1,129 @@
-{% comment %}
-  TODO: extract the shared site header (logo, navigation, search, language
-  switcher) from the exported HTML and render it here. For now we provide a
-  minimal placeholder so that early Jekyll pages have a stable insertion point.
-{% endcomment %}
-<header class="site-header">
+<ul class="genesis-skip-link">
+  <li><a class="screen-reader-shortcut" href="#mai-menu">Menu</a></li>
+  <li><a class="screen-reader-shortcut" href="#genesis-content">Skip to main content</a></li>
+  <li><a class="screen-reader-shortcut" href="#primary-sidebar">Skip to primary sidebar</a></li>
+  <li><a class="screen-reader-shortcut" href="#colophon">Skip to footer</a></li>
+</ul>
+<span id="header-trigger-wrap"><span id="header-trigger"></span></span>
+<header class="site-header has-header-right">
   <div class="wrap">
-    <a class="site-title" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <div class="site-header-row row middle-xs between-xs">
+      <div class="title-area col col-xs-auto start-xs">
+        <p class="site-title">
+          <a class="custom-logo-link" href="{{ '/' | relative_url }}" rel="home">
+            <img
+              alt="{{ site.title }}"
+              class="custom-logo"
+              decoding="async"
+              fetchpriority="high"
+              height="1200"
+              sizes="(max-width: 984px) 100vw, 984px"
+              src="{{ '/assets/b78878a0cfcb67598353b8572618c0feca4584fd5de6c493bf738f9c0541dc10.png' | relative_url }}"
+              srcset="{{ '/assets/b78878a0cfcb67598353b8572618c0feca4584fd5de6c493bf738f9c0541dc10.png' | relative_url }} 984w, {{ '/assets/b34fde7b1357ad12f76af5c18570923edd1990321cc31ccd218eb47744e337e8.png' | relative_url }} 246w, {{ '/assets/ac8518cb73dd06f7921b03f52b046a64ced72c167a65dc6dc5a46cfa268b7e12.png' | relative_url }} 840w, {{ '/assets/e471c05d4430918dab4043292b82c4322482656e727a54c00ef2d600dbf989e3.png' | relative_url }} 768w, {{ '/assets/8b4af8e35d8ea268e4c594848ca805f5acf1c2aeb8baa279fd238d60ecaed0d9.png' | relative_url }} 20w, {{ '/assets/4fc6365ca3fc1401801eb1ca4a12a7d485727da4949b6983bf0c81a0d2ac4c44.png' | relative_url }} 30w, {{ '/assets/4bac1a9feb17b0771b3476fdd30dec318370b1c8db610bf12e1fbb275c1676d0.png' | relative_url }} 39w"
+              width="984"
+            />
+          </a>
+        </p>
+        <p class="site-description screen-reader-text">{{ site.description }}</p>
+      </div>
+      <div class="header-right col col-xs text-xs-right">
+        <aside class="widget-area">
+          <h2 class="genesis-sidebar-title screen-reader-text">Header Right</h2>
+          <section class="widget widget_text" id="text-16">
+            <div class="widget-wrap">
+              <div class="textwidget">
+                <p class="site-titel">The Ultimate Stabat Mater Website</p>
+                <p class="site-omschrijving">a musical journey through the ages</p>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </div>
+    </div>
+    <div class="mai-menu" id="mai-menu">
+      <div class="mai-menu-outer">
+        <div class="mai-menu-inner">
+          <form action="{{ site.url }}/" class="search-form" method="get" role="search">
+            <label class="search-form-label screen-reader-text" for="searchform-global">Search this website</label>
+            <input class="search-form-input" id="searchform-global" name="s" placeholder="Search this website" type="search"/>
+            <input class="search-form-submit" type="submit" value="Search"/>
+            <meta content="{{ site.url }}/?s={s}"/>
+          </form>
+          <div class="menu-hoofdmenu-container">
+            <ul class="menu" id="menu-hoofdmenu">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home" id="menu-item-home">
+                <a href="{{ '/' | relative_url }}">Home</a>
+              </li>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children" id="menu-item-composers">
+                <a href="{{ '/stabat-mater-composer/' | relative_url }}">Composers</a>
+                <ul class="sub-menu">
+                  <li class="menu-item" id="menu-item-composers-alpha"><a href="{{ '/stabat-mater-composer/alphabetically/' | relative_url }}">Alphabetically</a></li>
+                  <li class="menu-item" id="menu-item-composers-country"><a href="{{ '/stabat-mater-composer/countries-of-origin/' | relative_url }}">By country of origin</a></li>
+                  <li class="menu-item" id="menu-item-composers-chron"><a href="{{ '/stabat-mater-composer/chronologically/' | relative_url }}">Chronologically</a></li>
+                  <li class="menu-item" id="menu-item-composers-duration"><a href="{{ '/stabat-mater-composer/duration/' | relative_url }}">By duration</a></li>
+                </ul>
+              </li>
+              <li class="menu-item" id="menu-item-texts"><a href="{{ '/stabat-mater-dolorosa-about-the-poem/' | relative_url }}">Texts</a></li>
+              <li class="menu-item" id="menu-item-translations"><a href="{{ '/stabat-mater-translations-and-languages/' | relative_url }}">Translations</a></li>
+              <li class="menu-item" id="menu-item-blog"><a href="{{ '/stabat-mater-blog/' | relative_url }}">Blog</a></li>
+              <li class="menu-item" id="menu-item-missing-cds"><a href="{{ '/stabat-mater-cd-collection/' | relative_url }}">Missing CDs</a></li>
+              <li class="menu-item" id="menu-item-about"><a href="{{ '/stabat-mater-foundation/' | relative_url }}">About</a></li>
+              <li class="menu-item" id="menu-item-donate"><a href="{{ '/stabat-mater-collection-support/' | relative_url }}">Donate?</a></li>
+              <li class="menu-item" id="menu-item-contact"><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </header>
+{% assign banner = page.banner | default: site.banner %}
+{% if banner %}
+<section class="section banner-area width-full has-bg-image light-content" style="background-color: {{ banner.background_color | default: '#f1f1f1' }};">
+  <picture class="bg-picture">
+    {% for source in banner.sources %}
+    <source media="{{ source.media }}" srcset="{{ source.srcset | relative_url }}"/>
+    {% endfor %}
+    {% if banner.img %}
+    <img
+      alt="{{ banner.img.alt | default: '' }}"
+      class="bg-image"
+      decoding="async"
+      height="{{ banner.img.height | default: 340 }}"
+      sizes="{{ banner.img.sizes | default: '(max-width: 1200px) 100vw, 1200px' }}"
+      src="{{ banner.img.src | relative_url }}"
+      srcset="{% assign srcset = banner.img.srcset | default: {} %}{% for entry in srcset %}{{ entry[1] | relative_url }} {{ entry[0] }}{% unless forloop.last %}, {% endunless %}{% endfor %}"
+      width="{{ banner.img.width | default: 1200 }}"
+    />
+    {% endif %}
+  </picture>
+  <div class="wrap height-lg center-xs text-xs-center text-lg">
+    <div class="section-content width-auto">
+      <h1 class="banner-title">{{ banner.title | default: page.title }}</h1>
+    </div>
+  </div>
+</section>
+{% endif %}
+<nav class="nav-secondary">
+  <div class="wrap">
+    <ul class="menu genesis-nav-menu menu-secondary responsive-menu" id="menu-hoofdmenu-1">
+      <li class="menu-item" id="menu-item-secondary-home"><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li class="menu-item menu-item-has-children" id="menu-item-secondary-composers">
+        <a href="{{ '/stabat-mater-composer/' | relative_url }}">Composers</a>
+        <ul class="sub-menu">
+          <li class="menu-item"><a href="{{ '/stabat-mater-composer/alphabetically/' | relative_url }}">Alphabetically</a></li>
+          <li class="menu-item"><a href="{{ '/stabat-mater-composer/countries-of-origin/' | relative_url }}">By country of origin</a></li>
+          <li class="menu-item"><a href="{{ '/stabat-mater-composer/chronologically/' | relative_url }}">Chronologically</a></li>
+          <li class="menu-item"><a href="{{ '/stabat-mater-composer/duration/' | relative_url }}">By duration</a></li>
+        </ul>
+      </li>
+      <li class="menu-item"><a href="{{ '/stabat-mater-dolorosa-about-the-poem/' | relative_url }}">Texts</a></li>
+      <li class="menu-item"><a href="{{ '/stabat-mater-translations-and-languages/' | relative_url }}">Translations</a></li>
+      <li class="menu-item"><a href="{{ '/stabat-mater-blog/' | relative_url }}">Blog</a></li>
+      <li class="menu-item"><a href="{{ '/stabat-mater-cd-collection/' | relative_url }}">Missing CDs</a></li>
+      <li class="menu-item"><a href="{{ '/stabat-mater-foundation/' | relative_url }}">About</a></li>
+      <li class="menu-item"><a href="{{ '/stabat-mater-collection-support/' | relative_url }}">Donate?</a></li>
+      <li class="menu-item"><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
+    </ul>
+  </div>
+</nav>

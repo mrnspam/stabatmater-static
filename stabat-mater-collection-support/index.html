@@ -858,58 +858,8 @@ time.uagb-post__date {
 <li>Subscribe to our <a href="https://www.youtube.com/channel/UCPUZ1hgQgIIYQeMqoJWWoXw">YouTube </a>channel (it&rsquo;s free!)</li>
 <li>Sign up for our newsletter;</li>
 <li>Participate in discussions on our <a class="broken_link" href="../topic/welcome-to-the-ultimate-stabat-mater-website-forum/index.html">forum</a>;</li>
-<li>Make a donation via credit card or PayPal</li>
 </ul>
-<form action="/stabat-mater-collection-support/" class="" id="dmm_form" method="post">
-<input name="dmm_recurring_interval" type="hidden" value="one"/>
-<p>
-<label for="dmm_name">Name</label>
-<input class="" id="dmm_name" name="dmm_name" style="width: 100%" type="text" value=""/>
-</p>
-<p>
-<label for="dmm_email">Email address<span style="color:red;">*</span></label>
-<input class="" id="dmm_email" name="dmm_email" style="width: 100%" type="email" value=""/>
-</p>
-<p>
-<input id="dmm_currency" name="dmm_currency" type="hidden" value="EUR"/>Amount<label for="dmm_amount"> (<span id="dmm_currency_symbol"></span>) <span style="color:red;">*</span></label><span style="display:block;overflow:auto;">
-<input class="" id="dmm_amount" min="1" name="dmm_amount" step="any" style="width: 100%;float:left;" type="number" value=""/></span> </p> <br/><br/>
-<p>
-<script>
-        function dmm_multicurrency_methods(value) {
-            let dmm_currencies = {"AED":"AED","AUD":"AUD","BGN":"BGN","CAD":"CAD","CHF":"CHF","CZK":"CZK","DKK":"DKK","EUR":"&euro;","GBP":"&pound;","HKD":"HKD","HRK":"HRK","HUF":"HUF","ILS":"ILS","ISK":"ISK","JPY":"&yen;","NOK":"NOK","NZD":"NZD","PHP":"PHP","PLN":"PLN","RON":"RON","RUB":"RUB","SEK":"SEK","SGD":"SGD","USD":"US$","ZAR":"ZAR"};
-            document.getElementById("dmm_currency_symbol").innerHTML = dmm_currencies[value];
-            
-            let x = document.getElementsByClassName("dmm_nomc");
-            for (let i = 0; i < x.length; i++) {
-                x[i].style.display = (value!="EUR" ? "none" : "block");
-                x[i].disabled = (value!="EUR" ? "disabled" : "");
-            }
-        }
-        </script><label class="dmm_dd dmm_nomc"><input checked="" name="dmm_method" type="radio" value="ideal"/> <img decoding="async" src="https://www.mollie.com/external/icons/payment-methods/ideal.png" style="vertical-align:middle;display:inline-block"/> iDEAL<br/></label><label class="dmm_cc dmm_mc"><input name="dmm_method" type="radio" value="creditcard"/> <img decoding="async" src="https://www.mollie.com/external/icons/payment-methods/creditcard.png" style="vertical-align:middle;display:inline-block"/> Card<br/></label><label class="dmm_recurring dmm_mc"><input name="dmm_method" type="radio" value="paypal"/> <img decoding="async" src="https://www.mollie.com/external/icons/payment-methods/paypal.png" style="vertical-align:middle;display:inline-block"/> PayPal<br/></label></p>
-<br/><br/>
-<script>
-                        window.onload = function () {
-                            var dmm_dd = document.getElementById('dmm_dd');
-                            if (dmm_dd !== null) {
-                                if (dmm_dd.value !== '--') {
-                                    document.getElementById('dmm_amount').value = document.getElementById('dmm_dd').value.replace(',', '.');
-                                    document.getElementById('dmm_amount').style.display = 'none';
-                                }
-                            }
-                                                        dmm_multicurrency_methods(document.getElementById('dmm_currency').value);
-                        }
-                    </script>
-<label for="dmm_permission_field" id="dmm_permission" style="display:none">
-<input id="dmm_permission_field" name="dmm_permission" type="checkbox"/>
-	                    I hereby authorize  to collect the amount shown above from my account periodically.                    </label>
-<p>
-<label for="dmm_gdpr"><input id="dmm_gdpr" name="dmm_gdpr" type="checkbox"/>
-                                I hereby agree to the                                <a href="" target="_blank">
-                                    Privacy Policy                                </a>
-</label>
-</p>
-<input class="" name="dmm_submitted" type="submit" value="Donate"/>
-</form>
+<p><strong>Temporarily unavailable:</strong> It is currently not possible to make donations. Please check back soon.</p>
 </div></article></main><aside aria-label="Primary Sidebar" class="sidebar sidebar-primary widget-area has-boxed" id="genesis-sidebar-primary" role="complementary"><h2 class="genesis-sidebar-title screen-reader-text">Primary Sidebar</h2><section class="widget boxed widget_text" id="text-60"><div class="widget-wrap"> <div class="textwidget"><p><a href="index.html"><img alt="" class="alignnone size-medium wp-image-17330" decoding="async" height="175" loading="lazy" sizes="auto, (max-width: 300px) 100vw, 300px" src="../assets/16fecb4e78f850ce9a99d1bd043574dc068e69ff555a4aeed231e142ada51cc1.jpg" srcset="../assets/16fecb4e78f850ce9a99d1bd043574dc068e69ff555a4aeed231e142ada51cc1.jpg 300w, ../assets/66a3858ef0021a6029b0ddd689676ca1ac9543165a40482e328b653f7661998e.jpg 24w, ../assets/2aca9f062eedcd1e5184b132a72b87aa10f2ae0f6e1961a60a44b43b5cde74b7.jpg 36w, ../assets/d120e9a2c3a0d229938d15e0d8f706f817b1c2765c012c086897350b4b351f8f.jpg 48w" width="300"/></a></p>
 </div>
 </div></section>

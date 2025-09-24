@@ -1,0 +1,56 @@
+title: "The ultimate Stabat Mater site"
+description: "a musical journey through the ages..."
+url: https://stabatmater.info
+baseurl: ""
+permalink: /:path/
+
+markdown: kramdown
+timezone: Europe/Amsterdam
+
+# Directories that must remain in the build while the migration is underway.
+include:
+  - assets
+  - category
+  - composer
+  - componist
+  - forum
+  - stabat-mater
+  - stabat-mater-blog
+  - stabat-mater-cd-collection
+  - stabat-mater-collection-support
+  - stabat-mater-colourbar
+  - stabat-mater-composer
+  - stabat-mater-english-translation
+  - stabat-mater-french-translation
+  - stabat-mater-foundation
+  - stabat-mater-german-translation
+  - stabat-mater-italian-translation
+  - stabat-mater-latin-text
+  - stabat-mater-spanish-translation
+  - stabat-mater-translations-and-languages
+  - stabat-mater-ukrainian-translation
+  - stabat-mater-welsh-translation
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules
+  - .gitignore
+  - .nojekyll
+
+collections:
+  posts:
+    output: true
+
+# Apply the default layout automatically once pages receive front matter.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap

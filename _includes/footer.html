@@ -1,0 +1,10 @@
+{% comment %}
+  TODO: consolidate the repeated footer widgets, credits, and newsletter signup
+  into this include. Keeping the block separated early on makes it easier to
+  migrate each element without touching individual content pages.
+{% endcomment %}
+<footer class="site-footer">
+  <div class="wrap">
+    <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
+  </div>
+</footer>

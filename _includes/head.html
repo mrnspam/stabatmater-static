@@ -1,0 +1,505 @@
+{% assign page_title = page.seo_title | default: page.title | default: site.title %}
+{% assign description = page.description | default: site.description %}
+{% assign canonical = page.canonical | default: page.url | absolute_url %}
+{% assign og_title = page.og_title | default: page_title %}
+{% assign og_description = page.og_description | default: description %}
+{% assign og_type = page.og_type | default: 'website' %}
+{% assign og_image = page.og_image | default: site.og_image %}
+{% assign modified_time = page.last_modified_at | default: page.date | default: site.time %}
+{% assign robots = page.robots | default: site.robots | default: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' %}
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="{{ robots }}" name="robots"/>
+<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+<title>{{ page_title }}</title>
+{% if description %}
+<meta content="{{ description | strip_newlines | escape }}" name="description"/>
+{% endif %}
+{% if canonical %}
+<link href="{{ canonical }}" rel="canonical"/>
+{% endif %}
+<meta content="{{ page.lang | default: 'en_US' }}" property="og:locale"/>
+<meta content="{{ og_type }}" property="og:type"/>
+<meta content="{{ og_title | strip_newlines | escape }}" property="og:title"/>
+{% if og_description %}
+<meta content="{{ og_description | strip_newlines | escape }}" property="og:description"/>
+{% endif %}
+{% if canonical %}
+<meta content="{{ canonical }}" property="og:url"/>
+{% endif %}
+<meta content="{{ site.title | escape }}" property="og:site_name"/>
+{% if og_image %}
+<meta content="{{ og_image | absolute_url }}" property="og:image"/>
+{% endif %}
+{% if modified_time %}
+<meta content="{{ modified_time | date_to_xmlschema }}" property="article:modified_time"/>
+{% endif %}
+<script class="yoast-schema-graph" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "{{ canonical | default: site.url }}/",
+      "url": "{{ canonical | default: site.url }}/",
+      "name": {{ page_title | jsonify }},
+      "isPartOf": { "@id": "{{ site.url }}/#website" },
+      "about": { "@id": "{{ site.url }}/#organization" },
+      "datePublished": {{ page.date | default: site.time | date_to_xmlschema | jsonify }},
+      {% if modified_time %}
+      "dateModified": {{ modified_time | date_to_xmlschema | jsonify }},
+      {% endif %}
+      {% if description %}
+      "description": {{ description | strip_newlines | jsonify }},
+      {% endif %}
+      "breadcrumb": { "@id": "{{ site.url }}/#breadcrumb" },
+      "inLanguage": "{{ page.lang | default: 'en-US' }}",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": ["{{ canonical | default: site.url }}/"]
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ site.url }}/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": {{ page.breadcrumb | default: 'Home' | jsonify }}
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "url": "{{ site.url }}/",
+      "name": {{ site.title | jsonify }},
+      {% if site.description %}
+      "description": {{ site.description | strip_newlines | jsonify }},
+      {% endif %}
+      "publisher": { "@id": "{{ site.url }}/#organization" },
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "{{ site.url }}/?s={search_term_string}"
+          },
+          "query-input": {
+            "@type": "PropertyValueSpecification",
+            "valueRequired": true,
+            "valueName": "search_term_string"
+          }
+        }
+      ],
+      "inLanguage": "{{ page.lang | default: 'en-US' }}"
+    },
+    {
+      "@type": "Organization",
+      "@id": "{{ site.url }}/#organization",
+      "name": {{ site.title | jsonify }},
+      "url": "{{ site.url }}/",
+      {% if site.logo %}
+      "logo": {
+        "@type": "ImageObject",
+        "inLanguage": "{{ page.lang | default: 'en-US' }}",
+        "@id": "{{ site.url }}/#/schema/logo/image/",
+        "url": "{{ site.logo | absolute_url }}",
+        "contentUrl": "{{ site.logo | absolute_url }}"
+      },
+      "image": { "@id": "{{ site.url }}/#/schema/logo/image/" }
+      {% endif %}
+    }
+  ]
+}
+</script>
+<link href="//fonts.googleapis.com" rel="dns-prefetch"/>
+<link href="{{ site.url }}/feed/" rel="alternate" title="{{ site.title }} » Feed" type="application/rss+xml"/>
+<link href="{{ site.url }}/comments/feed/" rel="alternate" title="{{ site.title }} » Comments Feed" type="application/rss+xml"/>
+<link href="{{ site.url }}/events/?ical=1" rel="alternate" title="{{ site.title }} » iCal Feed" type="text/calendar"/>
+<link href="{{ site.url }}/stabat-mater-collection/feed/" rel="alternate" title="{{ site.title }} » Explore the Timeless Legacy of the Stabat Mater Comments Feed" type="application/rss+xml"/>
+<script async="" data-cfasync="false" data-wpfc-render="false" src="https://www.googletagmanager.com/gtag/js?id=G-P3H9YYP0G1" type="text/javascript"></script>
+<script data-cfasync="false" data-wpfc-render="false" type="text/javascript">
+  var mi_version = '9.7.0';
+  var mi_track_user = true;
+  var mi_no_track_reason = '';
+  var MonsterInsightsDefaultLocations = {"page_location":"{{ canonical | default: site.url }}/"};
+  if (typeof MonsterInsightsPrivacyGuardFilter === 'function') {
+    var MonsterInsightsLocations = (typeof MonsterInsightsExcludeQuery === 'object') ? MonsterInsightsPrivacyGuardFilter(MonsterInsightsExcludeQuery) : MonsterInsightsPrivacyGuardFilter(MonsterInsightsDefaultLocations);
+  } else {
+    var MonsterInsightsLocations = (typeof MonsterInsightsExcludeQuery === 'object') ? MonsterInsightsExcludeQuery : MonsterInsightsDefaultLocations;
+  }
+  var disableStrs = ['ga-disable-G-P3H9YYP0G1'];
+  function __gtagTrackerIsOptedOut() {
+    for (var index = 0; index < disableStrs.length; index++) {
+      if (document.cookie.indexOf(disableStrs[index] + '=true') > -1) {
+        return true;
+      }
+    }
+    return false;
+  }
+  if (__gtagTrackerIsOptedOut()) {
+    for (var index = 0; index < disableStrs.length; index++) {
+      window[disableStrs[index]] = true;
+    }
+  }
+  function __gtagTrackerOptout() {
+    for (var index = 0; index < disableStrs.length; index++) {
+      document.cookie = disableStrs[index] + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+      window[disableStrs[index]] = true;
+    }
+  }
+  if (typeof gaOptout === 'undefined') {
+    function gaOptout() {
+      __gtagTrackerOptout();
+    }
+  }
+  window.dataLayer = window.dataLayer || [];
+  window.MonsterInsightsDualTracker = {
+    helpers: {},
+    trackers: {},
+  };
+  if (mi_track_user) {
+    function __gtagDataLayer() {
+      dataLayer.push(arguments);
+    }
+    function __gtagTracker(type, name, parameters) {
+      if (!parameters) {
+        parameters = {};
+      }
+      if (parameters.send_to) {
+        __gtagDataLayer.apply(null, arguments);
+        return;
+      }
+      if (type === 'event') {
+        parameters.send_to = monsterinsights_frontend.v4_id;
+        var hookName = name;
+        if (typeof parameters['event_category'] !== 'undefined') {
+          hookName = parameters['event_category'] + ':' + name;
+        }
+        if (typeof MonsterInsightsDualTracker.trackers[hookName] !== 'undefined') {
+          MonsterInsightsDualTracker.trackers[hookName](parameters);
+        } else {
+          __gtagDataLayer('event', name, parameters);
+        }
+      } else {
+        __gtagDataLayer.apply(null, arguments);
+      }
+    }
+    __gtagTracker('js', new Date());
+    __gtagTracker('set', {
+      'developer_id.dZGIzZG': true,
+    });
+    if (MonsterInsightsLocations.page_location) {
+      __gtagTracker('set', MonsterInsightsLocations);
+    }
+    __gtagTracker('config', 'G-P3H9YYP0G1', {"forceSSL":"true","link_attribution":"true"});
+    window.gtag = __gtagTracker;
+    (function () {
+      var noopfn = function () { return null; };
+      var newtracker = function () { return new Tracker(); };
+      var Tracker = function () { return null; };
+      var p = Tracker.prototype;
+      p.get = noopfn;
+      p.set = noopfn;
+      p.send = function () {
+        var args = Array.prototype.slice.call(arguments);
+        args.unshift('send');
+        __gaTracker.apply(null, args);
+      };
+      var __gaTracker = function () {
+        var len = arguments.length;
+        if (len === 0) { return; }
+        var f = arguments[len - 1];
+        if (typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function') {
+          if ('send' === arguments[0]) {
+            var hitConverted, hitObject = false, action;
+            if ('event' === arguments[1]) {
+              if (typeof arguments[3] !== 'undefined') {
+                hitObject = {
+                  'eventAction': arguments[3],
+                  'eventCategory': arguments[2],
+                  'eventLabel': arguments[4],
+                  'value': arguments[5] ? arguments[5] : 1,
+                };
+              }
+            }
+            if (hitObject) {
+              action = 'timing' === arguments[1].hitType ? 'timing_complete' : hitObject.eventAction;
+              hitConverted = mapArgs(hitObject);
+              __gtagTracker('event', action, hitConverted);
+            }
+          }
+          return;
+        }
+        function mapArgs(args) {
+          var arg, hit = {};
+          var gaMap = {
+            'eventCategory': 'event_category',
+            'eventAction': 'event_action',
+            'eventLabel': 'event_label',
+            'eventValue': 'event_value',
+            'nonInteraction': 'non_interaction',
+            'timingCategory': 'event_category',
+            'timingVar': 'name',
+            'timingValue': 'value',
+            'timingLabel': 'event_label',
+            'page': 'page_path',
+            'location': 'page_location',
+            'title': 'page_title',
+            'referrer': 'page_referrer',
+          };
+          for (arg in args) {
+            if (!( !args.hasOwnProperty(arg) || !gaMap.hasOwnProperty(arg))) {
+              hit[gaMap[arg]] = args[arg];
+            } else {
+              hit[arg] = args[arg];
+            }
+          }
+          return hit;
+        }
+        try {
+          f.hitCallback();
+        } catch (ex) {}
+      };
+      __gaTracker.create = newtracker;
+      __gaTracker.getByName = newtracker;
+      __gaTracker.getAll = function () { return []; };
+      __gaTracker.remove = noopfn;
+      __gaTracker.loaded = true;
+      window['__gaTracker'] = __gaTracker;
+    })();
+  } else {
+    console.log('');
+    (function () {
+      function __gtagTracker() { return null; }
+      window['__gtagTracker'] = __gtagTracker;
+      window['gtag'] = __gtagTracker;
+    })();
+  }
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/16.0.1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/stabatmater.info\/wp-includes\/js\/wp-emoji-release.min.js"}};
+/*! This file is auto-generated */
+!function(s,n){var o,i,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),a=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===a[t]})}function u(e,t){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);for(var n=e.getImageData(16,16,1,1),a=0;a<n.data.length;a++)if(0!==n.data[a])return!1;return!0}function f(e,t,n,a){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\udde8\ud83c\uddf6","\ud83c\udde8\u200b\ud83c\uddf6")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!a(e,"\ud83e\udedf")}return!1}function g(e,t,n,a){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):s.createElement("canvas"),o=r.getContext("2d",{willReadFrequently:!0}),i=(o.textBaseline="top",o.font="600 32px Arial",{});return e.forEach(function(e){i[e]=t(o,e,n,a)}),i}function t(e){var t=s.createElement("script");t.src=e,t.defer=!0,s.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",i=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){s.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+g.toString()+"("+[JSON.stringify(i),f.toString(),p.toString(),u.toString()].join(",")+") );",a=new Blob([e],{type:"text/javascript"}),r=new Worker(URL.createObjectURL(a),{name:"wpTestEmojiSupports"});return void(r.onmessage=function(e){c(n=e.data),r.terminate(),t(n)})}catch(e){}c(n=g(i,f,p,u))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<link href="{{ '/assets/774d3003b5549c4f934fb09c2e56f3a092ba02054d8c2b5944371891802b6fd7.css' | relative_url }}" id="genesis-blocks-style-css-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/f31780b817103b5f627f41bc9044e890f34d3855e0f55002052593a44f608012.css' | relative_url }}" id="sbi_styles-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="wp-emoji-styles-inline-css" type="text/css">
+img.wp-smiley, img.emoji { display: inline !important; border: none !important; box-shadow: none !important; height: 1em !important; width: 1em !important; margin: 0 0.07em !important; vertical-align: -0.1em !important; background: none !important; padding: 0 !important; }
+</style>
+<link href="{{ '/assets/896dc133320281a35fe566abcf02ea0c83bcbbd1e03847a29c9dff1e03c1be47.css' | relative_url }}" id="wp-block-library-css" media="all" rel="stylesheet" type="text/css"/>
+<style id="classic-theme-styles-inline-css" type="text/css">
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<link href="{{ '/assets/56c98accff7adba92acbc1fe71f6bc218eeb9aa6643c45286a735a65000b35d9.css' | relative_url }}" id="fontAwesome-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/bcb99e11fbf6568a3e5b30cc14f67fe06f3f47c08eeea688d04ca8d3605ed542.css' | relative_url }}" id="mediaelement-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/1113013a6874efc4939b0f4f0c3f52f9bdec362b3f5e6019cf9459847468ebf7.css' | relative_url }}" id="wp-mediaelement-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/905f328b4040e094fed2533517af31557d4e457703e16bc937c375365a0c75b7.css' | relative_url }}" id="view_editor_gutenberg_frontend_assets-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/da5c3933404d78e689e9a823d53cba52174b7029d31cc7861d99da2950863b64.css' | relative_url }}" id="cookie-notice-front-css" media="all" rel="stylesheet" type="text/css"/>
+<script id="cookie-notice-front-js-before" type="text/javascript">
+/* <![CDATA[ */
+var cnArgs = {"ajaxUrl":"https:\/\/stabatmater.info\/wp-admin\/admin-ajax.php","nonce":"0b05f5a7b1","hideEffect":"fade","position":"bottom","onScroll":false,"onScrollOffset":100,"onClick":false,"cookieName":"cookie_notice_accepted","cookieTime":2592000,"cookieTimeRejected":2592000,"globalCookie":false,"redirection":false,"cache":false,"revokeCookies":false,"revokeCookiesOpt":"automatic"};
+/* ]]> */
+</script>
+<link href="{{ '/assets/448e794ab832e84c0f808aa2c0b1c68a908107240f044d9938cddf2102a8b261.css' | relative_url }}" id="menu-image-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/096eac38f1daafc3abf9e2262dd08ec341d302f3f04400e055654048df39bacb.css' | relative_url }}" id="dashicons-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/afc2dff9e6f7a8658ee68a02e2fc086c69355a4a57453cbd006c07a26fb4c614.css' | relative_url }}" id="widgetopts-styles-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/397fab85136f43f52b43694c7c2e21c82a603c8bdf0fff02e1b96fe1c880c06f.css' | relative_url }}" id="wpml-legacy-horizontal-list-0-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/05261b57040c045ef0cb8f307ab5733d6febe58c2dc6b1d7f4151df69118031d.css' | relative_url }}" id="wpml-menu-item-0-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="https://fonts.googleapis.com/css?family=Domine%7CSource+Sans+Pro%3A400i%2C400%2C500%2C600%2C700&amp;ver=1.0.0" id="maitheme-google-fonts-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/03d602cabed80b9099361d9a0154bffed0e2892955bfcaea35994de29c51498d.css' | relative_url }}" id="mai-theme-engine-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/89a03ed69c529dd2dda783995003056678066bb707475e0a18295c37e11283d4.css' | relative_url }}" id="flexington-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/a5e33a4bfed606263eacd361419cc36b886dc85e2f337a01d1fa6ee6bef7767d.css' | relative_url }}" id="simple-social-icons-font-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/a6d304c4edeb0e78b815e5eb4f182fe4a0cc4f0a2f6598bc29f01a8ef8dfcbc5.css' | relative_url }}" id="slb_core-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/42860dcb53e95a60c59e8393cd96b4bd6d4a74fe3408be0791522619cab8ea6d.css' | relative_url }}" id="genesis-overrides-css-css" media="screen" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/87b4a29666485309b5ebd089caedc8d1d94ba524952c5b98d505987ae9cef0f1.css' | relative_url }}" id="mai-law-pro-css" media="all" rel="stylesheet" type="text/css"/>
+<link href="{{ '/assets/e662f8135f4aabe7cadb9e1dc01d181eb71b3702374833f8be5d4dec679a8c22.css' | relative_url }}" rel="stylesheet"/>
+<link href="https://stabatmater.info/wp-json/" rel="https://api.w.org/"/>
+<link href="https://stabatmater.info/wp-json/wp/v2/pages/2274" rel="alternate" title="JSON" type="application/json"/>
+<link href="https://stabatmater.info/xmlrpc.php?rsd" rel="EditURI" title="RSD" type="application/rsd+xml"/>
+<link href="https://stabatmater.info/" rel="shortlink"/>
+<link href="https://stabatmater.info/wp-json/oembed/1.0/embed?url={{ canonical | uri_escape }}" rel="alternate" title="oEmbed (JSON)" type="application/json+oembed"/>
+<link href="https://stabatmater.info/wp-json/oembed/1.0/embed?url={{ canonical | uri_escape }}&amp;format=xml" rel="alternate" title="oEmbed (XML)" type="text/xml+oembed"/>
+<link href="https://stabatmater.info/wp-json/tribe/events/v1/" rel="alternate"/>
+<script id="cookie-notice-front-js" src="{{ '/assets/b7cd9a17a7636873e0d8394ba7dcd5ec596468da2ff03628f851bfd57d27108a.js' | relative_url }}" type="text/javascript"></script>
+<link href="https://stabatmater.info/wp-content/uploads/2020/11/cropped-cropped-stabat-mater-beeld-32x32.png" rel="icon" sizes="32x32"/>
+<link href="https://stabatmater.info/wp-content/uploads/2020/11/cropped-cropped-stabat-mater-beeld-192x192.png" rel="icon" sizes="192x192"/>
+<link href="https://stabatmater.info/wp-content/uploads/2020/11/cropped-cropped-stabat-mater-beeld-180x180.png" rel="apple-touch-icon"/>
+<meta content="https://stabatmater.info/wp-content/uploads/2020/11/cropped-cropped-stabat-mater-beeld-270x270.png" name="msapplication-TileImage"/>
+<style id="wp-custom-css" type="text/css">
+/*
+ * font-family: 'Domine', serif;
+font-family: 'Source Sans Pro', sans-serif;
+*/
+body {
+font-family: 'Source Sans Pro', sans-serif;
+font-weight: 400;
+background:#fff;
+        color:#323232;
+        font-size: 13px;
+}
+.site-inner {
+        margin:40px auto 0;
+}
+.text-md {
+        font-size:1.1rem;
+}
+blockquote {
+        font-weight:300;
+        letter-spacing:0;
+        font-style:italic;
+        border-left:32px solid rgba(0,0,0,0);
+}
+/* headings */
+h1, .banner-title, .heading, .widget-title, .widgettitle, h2, h3, h3.widgettitle, h4, h5 {
+        font-family: 'Domine', serif;
+}
+h1, .banner-title, .heading, h1.entry-title {
+font-weight: 400;
+        font-size:1.9rem!important;
+        letter-spacing:0;
+}
+
+h2 {
+font-weight: 300;
+        font-size:1.3rem;
+        letter-spacing:0;
+}
+h3 {
+        font-family: 'Source Sans Pro', sans-serif;
+letter-spacing:0;
+        font-size:1.15rem;
+        font-weight:600;
+        margin-bottom:12px;
+}
+
+h3.widgettitle, .blog h3 {
+        font-family: 'Domine', serif;
+        font-size:1.3rem;
+        font-weight:300;
+}
+.uagb-post__excerpt {
+        height:150px!important;
+}
+ .uagb-post__text .uagb-post__cta {
+        float:right;
+}
+.uagb-block-ec1c5d90 .uagb-post__text .uagb-post__cta {
+        background-color:#aa2c0d;
+
+}
+.uagb-post-grid-byline {
+        margin-bottom:0!important;
+}
+p.entry-meta {
+margin-bottom:0;}
+
+.archive.category .entry-header {
+        display:none;
+}
+.archive.category .content-sidebar-wrap .entry-header {
+        display:block;
+}
+/* sidebar */
+.sidebar .widget.boxed {
+        padding:0;
+}
+.sidebar #text-58.widget,
+.sidebar #text-57.widget{
+        background:#2f6654;
+        color:#fff;
+        padding:10px;
+        border: 4px solid #aa2c0d;
+}
+/* Footer */
+.footer-widgets {
+        background-color:#aa2c0d;
+}
+.footer-widgets>.wrap {
+        padding-top:30px;
+        padding-bottom:10px;
+}
+.footer-widgets .widget {
+        margin-bottom:10px;
+}
+.site-footer {
+        padding-top:10px;
+        padding-bottom:10px
+}
+.footer-widgets .widget-title, .footer-widgets .widgettitle{
+        margin-bottom:10px;}
+
+/* contactformulier */
+.gform_wrapper .left_label input.medium, .gform_wrapper .left_label select.medium, .gform_wrapper .right_label input.medium, .gform_wrapper .right_label select.medium,
+.gform_wrapper .left_label textarea.large, .gform_wrapper .left_label textarea.medium, .gform_wrapper .left_label textarea.small, .gform_wrapper .right_label textarea.large, .gform_wrapper .right_label textarea.medium, .gform_wrapper .right_label textarea.small{
+        width:100%;
+}
+
+th {
+                text-transform:none;
+        }
+.banner-area p:last-of-type {
+        display:none;
+}
+
+.wp-block-button__link {
+        color:#fff!important;
+}
+time.uagb-post__date {
+    margin-top: 20px;
+}
+/* media queries*/
+@media only screen and (max-width: 1240px) {
+        .banner-area.section {
+        margin-top:-250px;
+        z-index:0;
+        height:inherit;
+}
+}
+@media (max-width: 976px){
+.uagb-post-grid .uagb-post__columns-tablet-2 article
+ {
+    width: 49%;
+}
+
+}
+@media only screen and (max-width: 768px){
+        .genesis-nav-menu .mobile {
+        display:block;
+}
+
+#menu-topmenu {
+        display:none;
+}
+        .banner-area.section {
+                margin-top:-50px;
+        }
+        .site-header a {margin:0;}
+        .header-right{display:block;}
+        p.site-omschrijving {
+                font-size:16px;
+        }
+        p.site-titel {font-size:20px;}
+        .entry.boxed {
+                padding:0;
+                border:none;
+                        background:none;
+        }
+
+}
+@media only screen and (max-width: 414px){
+        p.site-omschrijving {
+                display:none;
+        }
+                .uagb-post-grid .uagb-post__columns-mobile-1 article {
+                width:100%;
+        }
+}
+</style>

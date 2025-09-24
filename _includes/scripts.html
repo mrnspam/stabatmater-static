@@ -1,0 +1,69 @@
+<script>
+  (function() {
+    window.mc4wp = window.mc4wp || {
+      listeners: [],
+      forms: {
+        on: function(evt, cb) {
+          window.mc4wp.listeners.push({ event: evt, callback: cb });
+        }
+      }
+    };
+  })();
+</script>
+<script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/stabatmater-2\/*","\/wp-content\/themes\/genesis\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch,.no-prefetch a"}}]},"eagerness":"conservative"}]}</script>
+<script>
+  (function (body) {
+    'use strict';
+    body.className = body.className.replace(/\btribe-no-js\b/, 'tribe-js');
+  })(document.body);
+</script>
+<script>
+(function() {
+  function maybePrefixUrlField () {
+    const value = this.value.trim();
+    if (value !== '' && value.indexOf('http') !== 0) {
+      this.value = 'http://' + value;
+    }
+  }
+  const urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
+  for (let j = 0; j < urlFields.length; j++) {
+    urlFields[j].addEventListener('blur', maybePrefixUrlField);
+  }
+})();
+</script>
+<script type="text/javascript">
+  function genesisBlocksShare(url, title, w, h) {
+    var left = (window.innerWidth / 2) - (w / 2);
+    var top = (window.innerHeight / 2) - (h / 2);
+    return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=600, height=600, top=' + top + ', left=' + left);
+  }
+</script>
+<script type="text/javascript">var sbiajaxurl = "https://stabatmater.info/wp-admin/admin-ajax.php";
+</script>
+<script>
+/* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */
+</script>
+<script id="genesis-blocks-dismiss-js-js" src="{{ '/assets/5734c669b341a17722eeae846e120e3e44648994dad0fa3d6f315b91659a8780.js' | relative_url }}" type="text/javascript"></script>
+<script id="isotope-js" src="{{ '/assets/1f3e4e8b6593f2c6ec2cb62a4717e670e26d8c515c604bf7bb537c902d30ed68.js' | relative_url }}" type="text/javascript"></script>
+<script id="isotope-init-js" src="{{ '/assets/4949350e934d8302f587956129b5fae6133855d01b88b837dffa333799fe8b1f.js' | relative_url }}" type="text/javascript"></script>
+<script async="async" data-wp-strategy="async" id="comment-reply-js" src="{{ '/assets/834b5e0dfe39da19aec5ce200b9d514314a0bad5d723a99262f9d98b1b6ca455.js' | relative_url }}" type="text/javascript"></script>
+<script id="hoverIntent-js" src="{{ '/assets/878fe22af4c0105a69cd338defaeae6b13993594d9a3d7831e098b6830d35c7c.js' | relative_url }}" type="text/javascript"></script>
+<script id="superfish-js" src="{{ '/assets/c7fb28de0090b40e44c1966e05a3aee9f2fb8ffb909dac15e4da07650b57bbdb.js' | relative_url }}" type="text/javascript"></script>
+<script id="skip-links-js" src="{{ '/assets/2c01acb28575394c1a4f3ce8257622be03804b92d65cbc33bfb09d7ebd88c6c3.js' | relative_url }}" type="text/javascript"></script>
+<script id="mai-theme-engine-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var maiVars = {"mainMenu":"Menu","subMenu":"Submenu","searchBox":"<div class=\"search-box\" style=\"display:none;\"><form class=\"search-form\" method=\"get\" action=\"https:\/\/stabatmater.info\/\" role=\"search\"><label class=\"search-form-label screen-reader-text\" for=\"searchform-1\">Search this website<\/label><input class=\"search-form-input\" type=\"search\" name=\"s\" id=\"searchform-1\" placeholder=\"Search this website\"><input class=\"search-form-submit\" type=\"submit\" value=\"Search\"><meta content=\"https:\/\/stabatmater.info\/?s={s}\"><\/form><\/div>","maiScrollTo":".scroll-to"};
+/* ]]> */
+</script>
+<script id="mai-theme-engine-js" src="{{ '/assets/3279c205b93d03f16d9d3b275402cbb73fe4b331983197ae9a9d1953505ad82a.js' | relative_url }}" type="text/javascript"></script>
+<script id="basic-scroll-js" src="{{ '/assets/084577dddc2d54e99c6a8ba8c9f6529fbed60dc70dbeb0793b35e1e1ff133237.js' | relative_url }}" type="text/javascript"></script>
+<script id="mai-scroll-js-extra" type="text/javascript">
+/* <![CDATA[ */
+var maiScroll = {"logoWidth":"250","logoTop":"0","logoBottom":"0","logoShrinkWidth":"100","logoShrinkTop":"-50","logoShrinkBottom":"0"};
+/* ]]> */
+</script>
+<script id="mai-scroll-js" src="{{ '/assets/73abdacd236813e10dd97578312865d366ccd646ee318015c23a0a327c7c0d53.js' | relative_url }}" type="text/javascript"></script>
+<script id="mai-responsive-videos-js" src="{{ '/assets/455e3a7f053e3940e0ae79587e612cd09ac5b34aa481f7a47b7d35416f17a9ee.js' | relative_url }}" type="text/javascript"></script>
+<script id="mai-responsive-video-init-js" src="{{ '/assets/3d1f94b919547af9d73c9f0684644c106745c5044ad0ab05e6966ebec61edabd.js' | relative_url }}" type="text/javascript"></script>
+<script defer="" id="mc4wp-forms-api-js" src="{{ '/assets/ad1a35ca3972f0358b9df9cc4783e3f1c233a6f683bb2d70ff6dc1c22b4a1452.js' | relative_url }}" type="text/javascript"></script>
+<script id="slb_context" type="text/javascript">/* <![CDATA[ */if ( !!window.jQuery ) {(function($){$(document).ready(function(){if ( !!window.SLB ) { {$.extend(SLB, {"context":["public","user_guest"]});} }})})(jQuery);}/* ]]> */</script>

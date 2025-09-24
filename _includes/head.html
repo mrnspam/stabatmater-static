@@ -1,0 +1,18 @@
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+{% assign description = page.description | default: site.description %}
+{% if description %}
+<meta content="{{ description | escape }}" name="description"/>
+{% endif %}
+{% comment %}
+  TODO: migrate the canonical links, Open Graph tags, and the complete stylesheet
+  stack from the exported HTML documents into this include.
+{% endcomment %}
+<link href="{{ '/assets/774d3003b5549c4f934fb09c2e56f3a092ba02054d8c2b5944371891802b6fd7.css' | relative_url }}" rel="stylesheet"/>
+<link href="{{ '/assets/896dc133320281a35fe566abcf02ea0c83bcbbd1e03847a29c9dff1e03c1be47.css' | relative_url }}" rel="stylesheet"/>
+{% comment %}
+  The migration will eventually collapse these hashed files into a managed asset
+  pipeline, but including them here preserves the current design while we
+  refactor page templates.
+{% endcomment %}

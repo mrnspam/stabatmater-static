@@ -1,0 +1,83 @@
+title: "The ultimate Stabat Mater site"
+description: "a musical journey through the ages..."
+logo: /assets/b78878a0cfcb67598353b8572618c0feca4584fd5de6c493bf738f9c0541dc10.png
+og_image: /assets/6d3da5459f11e72979942abce53ccfe1bb939d8f5d358fc3a00da8f533169cde.jpg
+robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+body_class: "home wp-singular page-template-default page page-id-2274 wp-custom-logo wp-theme-genesis wp-child-theme-stabatmater-2 cookies-not-set tribe-no-js header-full-width content-sidebar genesis-breadcrumbs-hidden genesis-footer-widgets-visible has-standard-menu singular no-js has-banner-area text-md has-sidebar has-one-sidebar"
+banner:
+  background_color: "#f1f1f1"
+  title: "Explore the Timeless Legacy of the Stabat Mater"
+  sources:
+    - media: "(max-width: 260px)"
+      srcset: /assets/7803b5d3cb64f8ebc3d9bd3ba9e635d7936b3e99a80b6c77c55c1ce1eb45863a.jpg
+    - media: "(max-width: 350px)"
+      srcset: /assets/969f4fcacb0c60662dac29938d1bb8801ea72be4cbbcf91d3d2da302a86db69b.jpg
+    - media: "(max-width: 550px)"
+      srcset: /assets/263b87c2fc0630dc12913eb82567ec7198921220053f9f847816bc63601b565b.jpg
+    - media: "(max-width: 800px)"
+      srcset: /assets/161ec7906e9f9c12189460dfa5ff8748f6767bef1a35c40cfe800a63563f87f4.jpg
+  img:
+    alt: ""
+    width: 1200
+    height: 340
+    sizes: "(max-width: 1200px) 100vw, 1200px"
+    src: /assets/6d3da5459f11e72979942abce53ccfe1bb939d8f5d358fc3a00da8f533169cde.jpg
+    srcset:
+      "1200w": /assets/6d3da5459f11e72979942abce53ccfe1bb939d8f5d358fc3a00da8f533169cde.jpg
+      "300w": /assets/ad432f6d2274057bd803a9ff686731805a7a49d9b8b1b6593a02ca770fd8b169.jpg
+      "1024w": /assets/dce59910e5c518b4240e40e88e2341ced4a21655cb12a1f8a9cbdbd0dabace1b.jpg
+      "768w": /assets/7404051dcac755a9301c068bf7ee8fc9474a3f0222c16f52a461dc79fe1e97f2.jpg
+url: https://stabatmater.info
+baseurl: ""
+permalink: /:path/
+
+markdown: kramdown
+timezone: Europe/Amsterdam
+
+# Directories that must remain in the build while the migration is underway.
+include:
+  - assets
+  - category
+  - composer
+  - componist
+  - forum
+  - stabat-mater
+  - stabat-mater-blog
+  - stabat-mater-cd-collection
+  - stabat-mater-collection-support
+  - stabat-mater-colourbar
+  - stabat-mater-composer
+  - stabat-mater-english-translation
+  - stabat-mater-french-translation
+  - stabat-mater-foundation
+  - stabat-mater-german-translation
+  - stabat-mater-italian-translation
+  - stabat-mater-latin-text
+  - stabat-mater-spanish-translation
+  - stabat-mater-translations-and-languages
+  - stabat-mater-ukrainian-translation
+  - stabat-mater-welsh-translation
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules
+  - .gitignore
+  - .nojekyll
+
+collections:
+  posts:
+    output: true
+
+# Apply the default layout automatically once pages receive front matter.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap

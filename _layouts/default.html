@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'en-US' }}">
+  <head>
+    {% include head.html %}
+  </head>
+  <body class="{{ page.body_class | default: site.body_class | default: 'wp-singular page-template-default page page-id-2274 wp-custom-logo wp-theme-genesis wp-child-theme-stabatmater-2 cookies-not-set tribe-no-js header-full-width content-sidebar genesis-breadcrumbs-hidden genesis-footer-widgets-visible has-standard-menu singular no-js has-banner-area text-md has-sidebar has-one-sidebar' }}">
+    <script>
+      //<![CDATA[
+      (function() {
+        var c = document.body.classList;
+        c.remove('no-js');
+        c.add('js');
+      })();
+      //]]>
+    </script>
+    <nav class="nav-third">
+      <div class="wrap">
+        <ul class="menu genesis-nav-menu menu-third responsive-menu" id="menu-topmenu">
+          <li class="menu-item" id="menu-item-7781"><a href="{{ '/stabat-mater-collection-support/' | relative_url }}">Donate</a></li>
+          <li class="instagram menu-item" id="menu-item-8389">
+            <a href="https://www.instagram.com/stabatmater.info/">
+              <span class="menu-image-title-hide menu-image-title">instagram</span>
+              <span class="dashicons dashicons-instagram hide-menu-image-icons"></span>
+            </a>
+          </li>
+          <li class="youtube menu-item" id="menu-item-8388">
+            <a href="https://www.youtube.com/channel/UCPUZ1hgQgIIYQeMqoJWWoXw">
+              <span class="menu-image-title-hide menu-image-title">Youtube</span>
+              <span class="dashicons dashicons-video-alt3 hide-menu-image-icons"></span>
+            </a>
+          </li>
+          <li class="twitter menu-item" id="menu-item-10243">
+            <a href="https://twitter.com/StabatMaterSite">
+              <span class="menu-image-title-hide menu-image-title">Twitter</span>
+              <span class="dashicons dashicons-twitter hide-menu-image-icons"></span>
+            </a>
+          </li>
+          <li class="menu-item wpml-ls-slot-91 wpml-ls-item wpml-ls-item-nl wpml-ls-menu-item wpml-ls-first-item wpml-ls-last-item" id="menu-item-wpml-ls-91-nl">
+            <a href="{{ '/nl/' | relative_url }}" title="Switch to ">
+              <img alt="Dutch" class="wpml-ls-flag" src="{{ '/assets/bdb5ca399133d894a962b9d5d4b58618b82e6a63d5701fa5a6b40e8835a8b93f.png' | relative_url }}"/>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="site-container">
+      {% include header.html %}
+      <div class="site-inner">
+        {% unless page.hide_entry_header %}
+        <header class="entry-header">
+          <h1 class="entry-title">{{ page.title }}</h1>
+        </header>
+        {% endunless %}
+        <div class="content-sidebar-wrap has-boxed-children">
+          <main class="content" id="genesis-content">
+            {{ content }}
+          </main>
+          {% unless page.hide_sidebar %}
+          {% include sidebar.html %}
+          {% endunless %}
+        </div>
+      </div>
+      {% include footer.html %}
+      <div aria-label="Cookie Notice" class="cookie-notice-hidden cookie-revoke-hidden cn-position-bottom" id="cookie-notice" role="dialog" style="background-color: rgba(50,50,58,1);">
+        <div class="cookie-notice-container" style="color: #fff">
+          <span class="cn-text-container" id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. If you continue to use this site we will assume that you are happy with it.</span>
+          <span class="cn-buttons-container" id="cn-notice-buttons"><button aria-label="Ok" class="cn-set-cookie cn-button" data-cookie-set="accept" id="cn-accept-cookie" style="background-color: #00a99d">Ok</button></span>
+          <span class="cn-close-icon" data-cookie-set="accept" id="cn-close-notice" title="No"></span>
+        </div>
+      </div>
+    </div>
+    {% include scripts.html %}
+  </body>
+</html>

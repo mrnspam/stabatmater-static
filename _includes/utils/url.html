@@ -18,6 +18,10 @@
   {% else %}
     {% assign preferred_root = include.base %}
   {% endcase %}
+  {% assign preferred_root = preferred_root | default: site.baseurl %}
+  {% if (preferred_root == '' or preferred_root == nil) and site.github and site.github.baseurl %}
+    {% assign preferred_root = site.github.baseurl %}
+  {% endif %}
   {% if preferred_root and preferred_root != '' %}
     {% assign trimmed = preferred_root | strip %}
     {% assign last_char = trimmed | slice: -1, 1 %}

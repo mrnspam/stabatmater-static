@@ -2,12 +2,14 @@
 {% assign path = raw_path | strip %}
 {% if path == '' %}
 {% elsif path contains '://' %}
-  {{ path | strip }}
+  {{- path | strip -}}
 {% elsif path | slice: 0, 1 == '#' %}
-  {{ path }}
+  {{- path -}}
 {% else %}
   {% assign normalized = path %}
+  {% assign had_leading_slash = false %}
   {% if normalized | slice: 0, 1 == '/' %}
+    {% assign had_leading_slash = true %}
     {% assign normalized = normalized | remove_first: '/' %}
   {% endif %}
 
@@ -27,54 +29,65 @@
 
   {% assign github = site.github %}
   {% if root == '' and github %}
-    {% assign github_base = github.baseurl | default: '' | strip %}
-    {% assign repo_slug = nil %}
-    {% if github.is_project_page %}
-      {% assign repo_slug = github.repository_name %}
-      {% if repo_slug == '' or repo_slug == nil %}
-        {% assign repo_nwo = github.repository_nwo | default: site.repository %}
-        {% if repo_nwo and repo_nwo != '' %}
-          {% assign repo_slug = repo_nwo | split: '/' | last %}
+    {% assign root = github.baseurl | default: '' | strip %}
+
+    {% if root == '' and github.is_project_page %}
+      {% assign repo_slug = github.repository_name | default: '' | strip %}
+      {% if repo_slug == '' %}
+        {% assign repo_nwo = github.repository_nwo | default: site.repository | default: '' | strip %}
+        {% if repo_nwo != '' %}
+          {% assign repo_slug = repo_nwo | split: '/' | last | strip %}
         {% endif %}
       {% endif %}
-    {% endif %}
 
-    {% assign use_github_base = github_base != '' %}
-    {% if use_github_base and repo_slug and repo_slug != '' and github_base contains '/pages/' %}
-      {% assign use_github_base = false %}
-    {% endif %}
-
-    {% if use_github_base %}
-      {% assign root = github_base %}
-    {% elsif repo_slug and repo_slug != '' %}
-      {% capture project_root %}/{{ repo_slug }}{% endcapture %}
-      {% assign root = project_root | strip %}
-    {% endif %}
-
-    {% if root == '' %}
-      {% assign root = github.url | default: '' | strip %}
+      {% if repo_slug != '' %}
+        {% capture inferred_root %}/{{ repo_slug }}{% endcapture %}
+        {% assign root = inferred_root | strip %}
+      {% endif %}
     {% endif %}
   {% endif %}
 
+  {% assign root = root | default: '' | strip %}
+
+  {% assign resolved = '' %}
+
   {% if root contains '://' %}
-    {% assign trailing = root | slice: -1, 1 %}
-    {% if trailing == '/' %}
-      {{ root | append: normalized | strip }}
+    {% assign needs_slash = normalized != '' %}
+    {% if needs_slash and root | slice: -1, 1 != '/' %}
+      {% assign resolved = root | append: '/' | append: normalized | strip %}
+    {% elsif needs_slash %}
+      {% assign resolved = root | append: normalized | strip %}
     {% else %}
-      {{ root | append: '/' | append: normalized | strip }}
+      {% assign resolved = root | strip %}
     {% endif %}
   {% elsif root != '' %}
     {% assign prefix = root %}
-    {% if prefix | slice: 0, 1 != '/' %}
-      {% assign prefix = '/' | append: prefix %}
+    {% if prefix | slice: -1, 1 == '/' %}
+      {% assign prefix = prefix | slice: 0, prefix | size | minus: 1 %}
     {% endif %}
-    {% assign trailing = prefix | slice: -1, 1 %}
-    {% if trailing == '/' %}
-      {{ prefix | append: normalized | strip }}
+
+    {% if normalized == '' and had_leading_slash %}
+      {% assign combined = prefix | append: '/' %}
+    {% elsif normalized == '' %}
+      {% assign combined = prefix %}
     {% else %}
-      {{ prefix | append: '/' | append: normalized | strip }}
+      {% capture combined %}{{ prefix }}/{{ normalized }}{% endcapture %}
     {% endif %}
+
+    {% if combined | slice: 0, 1 != '/' %}
+      {% assign combined = '/' | append: combined %}
+    {% endif %}
+
+    {% assign resolved = combined | replace: '//', '/' | strip %}
   {% else %}
-    {{ '/' | append: normalized | relative_url | strip }}
+    {% if normalized == '' and had_leading_slash %}
+      {% assign resolved = '/' | relative_url | append: '/' | strip %}
+    {% elsif normalized == '' %}
+      {% assign resolved = '/' | relative_url | strip %}
+    {% else %}
+      {% assign resolved = normalized | relative_url | strip %}
+    {% endif %}
   {% endif %}
+
+  {{- resolved | strip | replace: '\n', '' -}}
 {% endif %}

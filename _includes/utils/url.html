@@ -19,8 +19,23 @@
     {% assign preferred_root = include.base %}
   {% endcase %}
   {% assign preferred_root = preferred_root | default: site.baseurl %}
-  {% if (preferred_root == '' or preferred_root == nil) and site.github and site.github.baseurl %}
-    {% assign preferred_root = site.github.baseurl %}
+  {% assign github = site.github %}
+  {% if (preferred_root == '' or preferred_root == nil) and github %}
+    {% assign github_base = github.baseurl %}
+    {% if github_base and github_base != '' %}
+      {% assign preferred_root = github_base %}
+    {% elsif github.is_project_page %}
+      {% assign repo_name = github.repository_name %}
+      {% if repo_name == '' or repo_name == nil %}
+        {% assign repo_nwo = github.repository_nwo | default: site.repository %}
+        {% if repo_nwo and repo_nwo != '' %}
+          {% assign repo_name = repo_nwo | split: '/' | last %}
+        {% endif %}
+      {% endif %}
+      {% if repo_name and repo_name != '' %}
+        {% assign preferred_root = '/' | append: repo_name %}
+      {% endif %}
+    {% endif %}
   {% endif %}
   {% if preferred_root and preferred_root != '' %}
     {% assign trimmed = preferred_root | strip %}

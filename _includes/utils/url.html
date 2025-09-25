@@ -2,31 +2,92 @@
 {% assign path = raw_path | strip %}
 {% if path == '' %}
 {% elsif path contains '://' %}
-  {{ path | strip }}
+  {{- path | strip -}}
 {% elsif path | slice: 0, 1 == '#' %}
-  {{ path }}
+  {{- path -}}
 {% else %}
   {% assign normalized = path %}
-  {% if path | slice: 0, 1 == '/' %}
-    {% assign normalized = path | remove_first: '/' %}
+  {% assign had_leading_slash = false %}
+  {% if normalized | slice: 0, 1 == '/' %}
+    {% assign had_leading_slash = true %}
+    {% assign normalized = normalized | remove_first: '/' %}
   {% endif %}
+
   {% case include.scope %}
   {% when 'asset' %}
-    {% assign preferred_root = site.asset_root %}
+    {% assign root = site.asset_root %}
   {% when 'link' %}
-    {% assign preferred_root = site.link_root %}
+    {% assign root = site.link_root %}
   {% else %}
-    {% assign preferred_root = include.base %}
+    {% assign root = include.base %}
   {% endcase %}
-  {% if preferred_root and preferred_root != '' %}
-    {% assign trimmed = preferred_root | strip %}
-    {% assign last_char = trimmed | slice: -1, 1 %}
-    {% if last_char == '/' %}
-      {{ trimmed | append: normalized | strip }}
-    {% else %}
-      {{ trimmed | append: '/' | append: normalized | strip }}
-    {% endif %}
-  {% else %}
-    {{ '/' | append: normalized | relative_url | strip }}
+
+  {% assign root = root | default: '' | strip %}
+  {% if root == '' %}
+    {% assign root = site.baseurl | default: '' | strip %}
   {% endif %}
+
+  {% assign github = site.github %}
+  {% if root == '' and github %}
+    {% assign root = github.baseurl | default: '' | strip %}
+
+    {% if root == '' and github.is_project_page %}
+      {% assign repo_slug = github.repository_name | default: '' | strip %}
+      {% if repo_slug == '' %}
+        {% assign repo_nwo = github.repository_nwo | default: site.repository | default: '' | strip %}
+        {% if repo_nwo != '' %}
+          {% assign repo_slug = repo_nwo | split: '/' | last | strip %}
+        {% endif %}
+      {% endif %}
+
+      {% if repo_slug != '' %}
+        {% capture inferred_root %}/{{ repo_slug }}{% endcapture %}
+        {% assign root = inferred_root | strip %}
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% assign root = root | default: '' | strip %}
+
+  {% assign resolved = '' %}
+
+  {% if root contains '://' %}
+    {% assign needs_slash = normalized != '' %}
+    {% if needs_slash and root | slice: -1, 1 != '/' %}
+      {% assign resolved = root | append: '/' | append: normalized | strip %}
+    {% elsif needs_slash %}
+      {% assign resolved = root | append: normalized | strip %}
+    {% else %}
+      {% assign resolved = root | strip %}
+    {% endif %}
+  {% elsif root != '' %}
+    {% assign prefix = root %}
+    {% if prefix | slice: -1, 1 == '/' %}
+      {% assign prefix = prefix | slice: 0, prefix | size | minus: 1 %}
+    {% endif %}
+
+    {% if normalized == '' and had_leading_slash %}
+      {% assign combined = prefix | append: '/' %}
+    {% elsif normalized == '' %}
+      {% assign combined = prefix %}
+    {% else %}
+      {% capture combined %}{{ prefix }}/{{ normalized }}{% endcapture %}
+    {% endif %}
+
+    {% if combined | slice: 0, 1 != '/' %}
+      {% assign combined = '/' | append: combined %}
+    {% endif %}
+
+    {% assign resolved = combined | replace: '//', '/' | strip %}
+  {% else %}
+    {% if normalized == '' and had_leading_slash %}
+      {% assign resolved = '/' | relative_url | append: '/' | strip %}
+    {% elsif normalized == '' %}
+      {% assign resolved = '/' | relative_url | strip %}
+    {% else %}
+      {% assign resolved = normalized | relative_url | strip %}
+    {% endif %}
+  {% endif %}
+
+  {{- resolved | strip | replace: '\n', '' -}}
 {% endif %}

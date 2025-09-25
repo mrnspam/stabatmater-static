@@ -7,24 +7,72 @@
   {{ path }}
 {% else %}
   {% assign normalized = path %}
-  {% if path | slice: 0, 1 == '/' %}
-    {% assign normalized = path | remove_first: '/' %}
+  {% if normalized | slice: 0, 1 == '/' %}
+    {% assign normalized = normalized | remove_first: '/' %}
   {% endif %}
+
   {% case include.scope %}
   {% when 'asset' %}
-    {% assign preferred_root = site.asset_root %}
+    {% assign root = site.asset_root %}
   {% when 'link' %}
-    {% assign preferred_root = site.link_root %}
+    {% assign root = site.link_root %}
   {% else %}
-    {% assign preferred_root = include.base %}
+    {% assign root = include.base %}
   {% endcase %}
-  {% if preferred_root and preferred_root != '' %}
-    {% assign trimmed = preferred_root | strip %}
-    {% assign last_char = trimmed | slice: -1, 1 %}
-    {% if last_char == '/' %}
-      {{ trimmed | append: normalized | strip }}
+
+  {% assign root = root | default: '' | strip %}
+  {% if root == '' %}
+    {% assign root = site.baseurl | default: '' | strip %}
+  {% endif %}
+
+  {% assign github = site.github %}
+  {% if root == '' and github %}
+    {% assign github_base = github.baseurl | default: '' | strip %}
+    {% assign repo_slug = nil %}
+    {% if github.is_project_page %}
+      {% assign repo_slug = github.repository_name %}
+      {% if repo_slug == '' or repo_slug == nil %}
+        {% assign repo_nwo = github.repository_nwo | default: site.repository %}
+        {% if repo_nwo and repo_nwo != '' %}
+          {% assign repo_slug = repo_nwo | split: '/' | last %}
+        {% endif %}
+      {% endif %}
+    {% endif %}
+
+    {% assign use_github_base = github_base != '' %}
+    {% if use_github_base and repo_slug and repo_slug != '' and github_base contains '/pages/' %}
+      {% assign use_github_base = false %}
+    {% endif %}
+
+    {% if use_github_base %}
+      {% assign root = github_base %}
+    {% elsif repo_slug and repo_slug != '' %}
+      {% capture project_root %}/{{ repo_slug }}{% endcapture %}
+      {% assign root = project_root | strip %}
+    {% endif %}
+
+    {% if root == '' %}
+      {% assign root = github.url | default: '' | strip %}
+    {% endif %}
+  {% endif %}
+
+  {% if root contains '://' %}
+    {% assign trailing = root | slice: -1, 1 %}
+    {% if trailing == '/' %}
+      {{ root | append: normalized | strip }}
     {% else %}
-      {{ trimmed | append: '/' | append: normalized | strip }}
+      {{ root | append: '/' | append: normalized | strip }}
+    {% endif %}
+  {% elsif root != '' %}
+    {% assign prefix = root %}
+    {% if prefix | slice: 0, 1 != '/' %}
+      {% assign prefix = '/' | append: prefix %}
+    {% endif %}
+    {% assign trailing = prefix | slice: -1, 1 %}
+    {% if trailing == '/' %}
+      {{ prefix | append: normalized | strip }}
+    {% else %}
+      {{ prefix | append: '/' | append: normalized | strip }}
     {% endif %}
   {% else %}
     {{ '/' | append: normalized | relative_url | strip }}

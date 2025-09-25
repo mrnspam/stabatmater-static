@@ -55,6 +55,9 @@
           <main class="content" id="genesis-content">
             {{ content }}
           </main>
+          {% unless page.hide_sidebar %}
+          {% include sidebar.html %}
+          {% endunless %}
         </div>
       </div>
       {% include footer.html %}

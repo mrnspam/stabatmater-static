@@ -31,6 +31,8 @@ url: https://stabatmater.info
 baseurl: ""
 permalink: /:path/
 
+repository: stabatmater/stabatmater-static
+
 markdown: kramdown
 timezone: Europe/Amsterdam
 

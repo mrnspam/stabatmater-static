@@ -16,8 +16,8 @@
                     height="178"
                     loading="lazy"
                     sizes="auto, (max-width: 297px) 100vw, 297px"
-                    src="{{ '/assets/de1bb35313215d0c4f14c283d836d29e63b3840977a67decc4bb9f4a75ee0814.jpg' | relative_url }}"
-                    srcset="{{ '/assets/de1bb35313215d0c4f14c283d836d29e63b3840977a67decc4bb9f4a75ee0814.jpg' | relative_url }} 297w, {{ '/assets/4d7776a76a7fdfedbba10dbbc0cfc8d93d30d50d0a423bea0f3ecb95a782bdd7.jpg' | relative_url }} 24w, {{ '/assets/6ba7df2aa3dc789760f56bb2e5c799bec651f587dfcff1573e5521cc9fa1ae84.jpg' | relative_url }} 36w, {{ '/assets/af3e8a14bab08606a8294cc030c2bfe166ee169c41729664557e463cbf83507b.jpg' | relative_url }} 48w"
+                    src="{% include utils/url.html scope='asset' path='assets/de1bb35313215d0c4f14c283d836d29e63b3840977a67decc4bb9f4a75ee0814.jpg' %}"
+                    srcset="{% include utils/url.html scope='asset' path='assets/de1bb35313215d0c4f14c283d836d29e63b3840977a67decc4bb9f4a75ee0814.jpg' %} 297w, {% include utils/url.html scope='asset' path='assets/4d7776a76a7fdfedbba10dbbc0cfc8d93d30d50d0a423bea0f3ecb95a782bdd7.jpg' %} 24w, {% include utils/url.html scope='asset' path='assets/6ba7df2aa3dc789760f56bb2e5c799bec651f587dfcff1573e5521cc9fa1ae84.jpg' %} 36w, {% include utils/url.html scope='asset' path='assets/af3e8a14bab08606a8294cc030c2bfe166ee169c41729664557e463cbf83507b.jpg' %} 48w"
                     width="297"
                   />
                 </a>
@@ -42,8 +42,8 @@
                     height="178"
                     loading="lazy"
                     sizes="auto, (max-width: 297px) 100vw, 297px"
-                    src="{{ '/assets/8a12126af8cd6c8514d9f3614ed3520b61583573e8cde1eacb62ee1e98e864b6.jpg' | relative_url }}"
-                    srcset="{{ '/assets/8a12126af8cd6c8514d9f3614ed3520b61583573e8cde1eacb62ee1e98e864b6.jpg' | relative_url }} 297w, {{ '/assets/eed9c985a6c642a7915167328ca9531d7161e0ead6f03735066f59351d30c9f3.jpg' | relative_url }} 24w, {{ '/assets/6a418da7a381d78d24be3f9dbe8eeb9ec2cccf9f49b72729d1133a4425546cd7.jpg' | relative_url }} 36w, {{ '/assets/3225dcf678b1d8e4f1e6d67524ada03a488395ea03b0b883d9fe103a5d1bf559.jpg' | relative_url }} 48w"
+                    src="{% include utils/url.html scope='asset' path='assets/8a12126af8cd6c8514d9f3614ed3520b61583573e8cde1eacb62ee1e98e864b6.jpg' %}"
+                    srcset="{% include utils/url.html scope='asset' path='assets/8a12126af8cd6c8514d9f3614ed3520b61583573e8cde1eacb62ee1e98e864b6.jpg' %} 297w, {% include utils/url.html scope='asset' path='assets/eed9c985a6c642a7915167328ca9531d7161e0ead6f03735066f59351d30c9f3.jpg' %} 24w, {% include utils/url.html scope='asset' path='assets/6a418da7a381d78d24be3f9dbe8eeb9ec2cccf9f49b72729d1133a4425546cd7.jpg' %} 36w, {% include utils/url.html scope='asset' path='assets/3225dcf678b1d8e4f1e6d67524ada03a488395ea03b0b883d9fe103a5d1bf559.jpg' %} 48w"
                     width="297"
                   />
                 </a>
@@ -64,7 +64,7 @@
                   <img
                     class="alignnone size-full wp-image-9160"
                     decoding="async"
-                    src="{{ '/assets/d15b955e06da74bcf5f0d0d0e0c36640bddab99463e45cd132268738cc749fd0.jpg' | relative_url }}"
+                    src="{% include utils/url.html scope='asset' path='assets/d15b955e06da74bcf5f0d0d0e0c36640bddab99463e45cd132268738cc749fd0.jpg' %}"
                   />
                 </a>
                 <a href="https://www.amazon.com/Stabat-Mater-Dolorosa-Journey-Centuries/dp/B0CY8T9MG1">New Release: Stabat Mater Dolorosa</a>
@@ -138,9 +138,9 @@
     <div class="creds">
       <p>
         © {{ site.time | date: '%Y' }} ·
-        <a href="{{ '/nl/copyright/' | relative_url }}" target="_blank">Copyright</a>
-        <a href="{{ '/nl/privacy/' | relative_url }}" target="_blank">Privacy</a>
-        <a href="{{ '/nl/disclaimer/' | relative_url }}" target="_blank">Disclaimer</a>
+        <a href="{% include utils/url.html scope='link' path='nl/copyright/' %}" target="_blank">Copyright</a>
+        <a href="{% include utils/url.html scope='link' path='nl/privacy/' %}" target="_blank">Privacy</a>
+        <a href="{% include utils/url.html scope='link' path='nl/disclaimer/' %}" target="_blank">Disclaimer</a>
         · Bouw: <a href="http://www.bronwasserwebsites.nl" target="_blank">Bronwasser Websites</a> in
         <a href="https://wordpress.org/">WordPress</a>
       </p>

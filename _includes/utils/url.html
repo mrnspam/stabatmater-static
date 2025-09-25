@@ -1,0 +1,38 @@
+{% assign raw_path = include.path | default: include.href | default: include.src | default: '' %}
+{% assign path = raw_path | strip %}
+{% if path == '' %}{% else %}
+  {% if path contains '://' %}
+    {{ path | strip }}
+  {% else %}
+    {% assign normalized = path | remove_first: '/' %}
+    {% case include.scope %}
+    {% when 'asset' %}
+      {% assign preferred = site.asset_root %}
+    {% when 'link' %}
+      {% assign preferred = site.link_root %}
+    {% else %}
+      {% assign preferred = include.base %}
+    {% endcase %}
+    {% if preferred and preferred != '' %}
+      {% assign candidate = preferred %}
+    {% elsif site.github and site.github.url %}
+      {% assign candidate = site.github.url %}
+    {% elsif site.url and site.url != '' %}
+      {% assign candidate = site.url %}
+    {% else %}
+      {% assign candidate = '' %}
+    {% endif %}
+    {% if candidate == '' %}
+      {{ '/' | append: normalized | relative_url | strip }}
+    {% else %}
+      {% assign trimmed = candidate | strip %}
+      {% assign last_char = trimmed | split: '' | last %}
+      {% if last_char == '/' %}
+        {% assign base = trimmed %}
+      {% else %}
+        {% assign base = trimmed | append: '/' %}
+      {% endif %}
+      {{ base | append: normalized | strip }}
+    {% endif %}
+  {% endif %}
+{% endif %}

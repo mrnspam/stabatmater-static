@@ -1,0 +1,32 @@
+{% assign raw_path = include.path | default: include.href | default: include.src | default: '' %}
+{% assign path = raw_path | strip %}
+{% if path == '' %}
+{% elsif path contains '://' %}
+  {{ path | strip }}
+{% elsif path | slice: 0, 1 == '#' %}
+  {{ path }}
+{% else %}
+  {% assign normalized = path %}
+  {% if path | slice: 0, 1 == '/' %}
+    {% assign normalized = path | remove_first: '/' %}
+  {% endif %}
+  {% case include.scope %}
+  {% when 'asset' %}
+    {% assign preferred_root = site.asset_root %}
+  {% when 'link' %}
+    {% assign preferred_root = site.link_root %}
+  {% else %}
+    {% assign preferred_root = include.base %}
+  {% endcase %}
+  {% if preferred_root and preferred_root != '' %}
+    {% assign trimmed = preferred_root | strip %}
+    {% assign last_char = trimmed | slice: -1, 1 %}
+    {% if last_char == '/' %}
+      {{ trimmed | append: normalized | strip }}
+    {% else %}
+      {{ trimmed | append: '/' | append: normalized | strip }}
+    {% endif %}
+  {% else %}
+    {{ '/' | append: normalized | relative_url | strip }}
+  {% endif %}
+{% endif %}
